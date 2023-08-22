@@ -6,6 +6,19 @@ function getComputerChoice() {
     return choices[random]
 }
 
+function calculateScore(stringResult) {
+    
+    let playerScore = 0, computerScore = 0;
+    if (stringResult.startsWith("Win",4)) {
+        return playerScore + 1; 
+    } else if (stringResult.startsWith("Lose",4)) {
+        return computerScore + 1; 
+    }
+
+    console.log(`Player:${playerScore}, Computer:${computerScore}`);
+    
+}
+
 function playRound(playerSelection, computerSelection) {
     let pSelection = playerSelection.toLowerCase();
     let cSelection = computerSelection;
@@ -34,4 +47,25 @@ function playRound(playerSelection, computerSelection) {
     else {
         return "It's a draw!"
     }
+}
+
+
+function game() {
+    const MAX_ROUND = 5;
+
+    for (let i = 0 ; i < MAX_ROUND ; i++ ) {
+
+        
+
+        let playInput = window.prompt(`Game ${i+1}: Enter Rock or Scissor or Paper`);
+        const cSelection = getComputerChoice();
+
+        console.log(`Game ${i+1}: You selected ${playInput}, Computer selected ${cSelection}`);
+        console.log(playRound(playInput, cSelection));
+        const stringResult = playRound(playInput, cSelection);
+        
+        
+    }
+    calculateScore(stringResult);
+
 }
