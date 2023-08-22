@@ -7,16 +7,12 @@ function getComputerChoice() {
 }
 
 function calculateScore(stringResult) {
-    
-    let playerScore = 0, computerScore = 0;
+        
     if (stringResult.startsWith("Win",4)) {
         return playerScore + 1; 
     } else if (stringResult.startsWith("Lose",4)) {
         return computerScore + 1; 
-    }
-
-    console.log(`Player:${playerScore}, Computer:${computerScore}`);
-    
+    }   
 }
 
 function playRound(playerSelection, computerSelection) {
@@ -52,20 +48,29 @@ function playRound(playerSelection, computerSelection) {
 
 function game() {
     const MAX_ROUND = 5;
+    let playerScore = 0, computerScore = 0;
 
-    for (let i = 0 ; i < MAX_ROUND ; i++ ) {
-
-        
+    for (let i = 0 ; i < MAX_ROUND ; i++ ) {        
 
         let playInput = window.prompt(`Game ${i+1}: Enter Rock or Scissor or Paper`);
         const cSelection = getComputerChoice();
 
-        console.log(`Game ${i+1}: You selected ${playInput}, Computer selected ${cSelection}`);
+        console.group(`Game ${i+1}`);
+        console.log(`You selected ${playInput}, Computer selected ${cSelection}`);
         console.log(playRound(playInput, cSelection));
+
         const stringResult = playRound(playInput, cSelection);
-        
+        if (stringResult.startsWith("Win",4)) {
+            playerScore = playerScore + 1; 
+        } else if (stringResult.startsWith("Lose",4)) {
+            computerScore = computerScore + 1; 
+        }        
+        console.log(`Player:${playerScore}, Computer:${computerScore}`);
         
     }
-    calculateScore(stringResult);
+    const winner = playerScore > computerScore ? "Player Wins" :
+    computerScore > playerScore ? "Computer Wins" : 
+    "It's a Draw!"
+    console.log(winner);
 
 }
